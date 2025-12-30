@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
             // Get data as array of arrays (header: 1)
             // This avoids any key inference issues
-            const rows: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const rows: (string | number | undefined)[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
             let importedCount = 0;
             let skippedCount = 0;
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
             for (let i = 0; i < Math.min(rows.length, 20); i++) {
                 const row = rows[i];
                 // Check if this row looks like a header
-                if (row && row.some((cell: any) => typeof cell === 'string' && (cell.toLowerCase().includes('catalog') || cell.toLowerCase().includes('part')))) {
+                if (row && row.some((cell) => typeof cell === 'string' && (cell.toLowerCase().includes('catalog') || cell.toLowerCase().includes('part')))) {
                     dataStartIndex = i + 1; // Start data after this row
                     break;
                 }

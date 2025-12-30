@@ -2,6 +2,7 @@
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { PartsCatalog } from '@/components/parts/PartsCatalog';
+import { Where } from 'payload';
 
 export default async function RidgidPage({
     searchParams,
@@ -15,7 +16,7 @@ export default async function RidgidPage({
 
     const payload = await getPayload({ config });
 
-    const where: any = {
+    const where: Where = {
         manufacturer: {
             equals: 'ridgid',
         },

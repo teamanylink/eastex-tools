@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { useCart } from "@/context/CartContext";
 
 interface Part {
     id: string;
@@ -56,6 +57,104 @@ function SkeletonGrid({ count = 24 }: { count?: number }) {
     );
 }
 
+// Part Card Component with Add to Cart
+function PartCard({ part, manufacturer }: { part: Part; manufacturer: "ridgid" | "greenlee" }) {
+    const { addItem, isInCart } = useCart();
+    const [justAdded, setJustAdded] = useState(false);
+    const inCart = isInCart(part.id);
+
+    const handleAddToCart = () => {
+        addItem({
+            id: part.id,
+            catalogNumber: part.catalogNumber,
+            name: part.description,
+            description: part.description,
+            manufacturer: part.manufacturer,
+            upc: part.upc,
+        });
+        setJustAdded(true);
+        setTimeout(() => setJustAdded(false), 2000);
+    };
+
+    const brandColor = manufacturer === "ridgid" ? "bg-red-500 hover:bg-red-400" : "bg-green-500 hover:bg-green-400";
+
+    return (
+        <div
+            className="group relative bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+        >
+            {/* In Cart Badge */}
+            {inCart && !justAdded && (
+                <div className="absolute top-3 right-3 bg-primary/20 text-primary text-[10px] font-bold px-2 py-0.5 rounded-full border border-primary/30">
+                    IN CART
+                </div>
+            )}
+
+            {/* Just Added Animation */}
+            {justAdded && (
+                <div className="absolute top-3 right-3 bg-primary text-black text-[10px] font-bold px-2 py-0.5 rounded-full animate-bounce">
+                    ✓ ADDED!
+                </div>
+            )}
+
+            <div className="flex justify-between items-start mb-4">
+                <div className="bg-black/40 px-3 py-1 rounded-lg border border-white/5 text-xs font-mono text-white/70 group-hover:text-white transition-colors">
+                    #{part.catalogNumber}
+                </div>
+                {part.upc && (
+                    <div className="text-[10px] text-white/20 font-mono uppercase tracking-widest">
+                        UPC: {part.upc}
+                    </div>
+                )}
+            </div>
+
+            <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 min-h-[56px] group-hover:text-primary transition-colors">
+                {part.description}
+            </h3>
+
+            <div className="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
+                <div className="text-xs text-white/40 uppercase tracking-widest font-semibold">
+                    In Stock
+                </div>
+
+                {/* Add to Cart Button */}
+                <button
+                    onClick={handleAddToCart}
+                    disabled={justAdded}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 ${justAdded
+                            ? 'bg-primary text-black'
+                            : inCart
+                                ? 'bg-white/10 text-white hover:bg-white/20'
+                                : `${brandColor} text-white`
+                        }`}
+                >
+                    {justAdded ? (
+                        <>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Added
+                        </>
+                    ) : inCart ? (
+                        <>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Add More
+                        </>
+                    ) : (
+                        <>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            Add to Cart
+                        </>
+                    )}
+                </button>
+            </div>
+        </div>
+    );
+}
+
 export function PartsCatalog({
     initialParts,
     totalPages,
@@ -67,18 +166,12 @@ export function PartsCatalog({
     const searchParams = useSearchParams();
     const [search, setSearch] = useState(searchParams.get("q") || "");
     const [isPending, startTransition] = useTransition();
-    const [isNavigating, setIsNavigating] = useState(false);
-
-    // Track navigation state
-    useEffect(() => {
-        setIsNavigating(false);
-    }, [initialParts, currentPage]);
+    const { getItemCount } = useCart();
 
     // Debounce search
     useEffect(() => {
         const timer = setTimeout(() => {
             if (search !== (searchParams.get("q") || "")) {
-                setIsNavigating(true);
                 const params = new URLSearchParams(searchParams.toString());
                 if (search) {
                     params.set("q", search);
@@ -96,7 +189,6 @@ export function PartsCatalog({
     }, [search, router, searchParams]);
 
     const handlePageChange = (newPage: number) => {
-        setIsNavigating(true);
         const params = new URLSearchParams(searchParams.toString());
         params.set("page", newPage.toString());
         startTransition(() => {
@@ -106,7 +198,8 @@ export function PartsCatalog({
 
     const brandColor = manufacturer === "ridgid" ? "text-red-500" : "text-green-500";
     const brandBg = manufacturer === "ridgid" ? "bg-red-500" : "bg-green-500";
-    const isLoading = isPending || isNavigating;
+    const isLoading = isPending;
+    const cartCount = getItemCount();
 
     return (
         <div className="relative min-h-screen flex flex-col">
@@ -115,6 +208,22 @@ export function PartsCatalog({
             <div className={`fixed top-[-20%] right-[-10%] w-[800px] h-[800px] ${manufacturer === 'ridgid' ? 'bg-red-600/10' : 'bg-green-600/10'} rounded-full blur-[120px] pointer-events-none z-0`}></div>
 
             <Header />
+
+            {/* Floating Cart Indicator */}
+            {cartCount > 0 && (
+                <Link
+                    href="/cart"
+                    className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-primary text-black font-bold px-5 py-3 rounded-full shadow-neon hover:shadow-neon-strong transition-all duration-300 hover:scale-105"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span>{cartCount} {cartCount === 1 ? 'Item' : 'Items'}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </Link>
+            )}
 
             <main className="flex-grow pt-32 px-4 md:px-10 pb-20 z-10">
                 <div className="max-w-7xl mx-auto space-y-10">
@@ -184,37 +293,7 @@ export function PartsCatalog({
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {initialParts.map((part) => (
-                                <div
-                                    key={part.id}
-                                    className="group relative bg-white/5 border border-white/5 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
-                                >
-                                    <div className="flex justify-between items-start mb-4">
-                                        <div className="bg-black/40 px-3 py-1 rounded-lg border border-white/5 text-xs font-mono text-white/70 group-hover:text-white transition-colors">
-                                            #{part.catalogNumber}
-                                        </div>
-                                        {part.upc && (
-                                            <div className="text-[10px] text-white/20 font-mono uppercase tracking-widest">
-                                                UPC: {part.upc}
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <h3 className="text-white font-bold text-lg mb-2 line-clamp-2 min-h-[56px] group-hover:text-primary transition-colors">
-                                        {part.description}
-                                    </h3>
-
-                                    <div className="mt-4 pt-4 border-t border-white/5 flex justify-between items-center opacity-70 group-hover:opacity-100 transition-opacity">
-                                        <div className="text-xs text-white/40 uppercase tracking-widest font-semibold">
-                                            In Stock
-                                        </div>
-                                        <button className="text-sm font-bold text-white flex items-center gap-2 group-hover:translate-x-1 transition-transform">
-                                            View Details
-                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
+                                <PartCard key={part.id} part={part} manufacturer={manufacturer} />
                             ))}
                         </div>
                     )}
