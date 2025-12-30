@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
     id: string;
@@ -11,9 +13,12 @@ interface ProductCardProps {
     rating?: number;
     reviewCount?: number;
     href: string;
+    manufacturer?: string;
+    catalogNumber?: string;
 }
 
 export function ProductCard({
+    id,
     name,
     subtitle,
     price,
@@ -23,9 +28,31 @@ export function ProductCard({
     rating = 4.5,
     reviewCount,
     href,
+    manufacturer = "RIDGID",
+    catalogNumber,
 }: ProductCardProps) {
     const isRefurbished = badge === "REFURB";
     const savings = originalPrice ? originalPrice - price : 0;
+    const { addItem } = useCart();
+    const [isAdded, setIsAdded] = useState(false);
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        addItem({
+            id,
+            name,
+            description: subtitle,
+            price,
+            image,
+            manufacturer,
+            catalogNumber: catalogNumber || id,
+        });
+
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 2000);
+    };
 
     return (
         <Link href={href} className="block group">
@@ -64,25 +91,22 @@ export function ProductCard({
 
                     {/* Quick Add Button (appears on hover) */}
                     <button
-                        className="absolute bottom-3 right-3 z-10 size-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-primary hover:text-black hover:border-primary transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            // Add to cart logic
-                        }}
+                        className={`absolute bottom-3 right-3 z-10 size-10 rounded-full backdrop-blur-md border flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 ${isAdded
+                                ? "bg-primary text-black border-primary opacity-100 translate-y-0"
+                                : "bg-white/10 border-white/20 text-white hover:bg-primary hover:text-black hover:border-primary"
+                            }`}
+                        onClick={handleAddToCart}
+                        disabled={isAdded}
                     >
-                        <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 4v16m8-8H4"
-                            />
-                        </svg>
+                        {isAdded ? (
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                            </svg>
+                        )}
                     </button>
                 </div>
 
@@ -140,13 +164,23 @@ export function ProductCard({
 
                 {/* Add to Cart Button (full width, appears on hover) */}
                 <button
-                    className="mt-4 w-full h-10 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-primary hover:text-black hover:border-primary transition-all flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        // Add to cart logic
-                    }}
+                    className={`mt-4 w-full h-10 rounded-xl border text-sm font-medium transition-all flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 ${isAdded
+                            ? "bg-primary text-black border-primary opacity-100 translate-y-0"
+                            : "bg-white/5 border-white/10 hover:bg-primary hover:text-black hover:border-primary"
+                        }`}
+                    onClick={handleAddToCart}
+                    disabled={isAdded}
                 >
-                    Add to Cart
+                    {isAdded ? (
+                        <>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Added
+                        </>
+                    ) : (
+                        "Add to Cart"
+                    )}
                 </button>
             </div>
         </Link>

@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { newEquipmentProducts } from "@/lib/products";
 
@@ -30,14 +28,12 @@ export default function NewEquipmentPage() {
     };
 
     return (
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative">
             {/* Background Effects */}
             <div className="fixed top-20 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10 mix-blend-screen"></div>
             <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-500/5 to-transparent rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
-            <Header />
-
-            <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-24">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Breadcrumbs & Heading */}
                 <div className="mb-10">
                     <div className="flex items-center gap-2 text-sm text-white/40 mb-4 pl-1">
@@ -231,6 +227,7 @@ export default function NewEquipmentPage() {
                                     rating={product.rating}
                                     reviewCount={product.reviewCount}
                                     href={`/products/new/${product.id}`}
+                                    catalogNumber={product.sku}
                                 />
                             ))}
                         </div>
@@ -246,9 +243,7 @@ export default function NewEquipmentPage() {
                         </div>
                     </section>
                 </div>
-            </main>
-
-            <Footer />
+            </div>
         </div>
     );
 }
