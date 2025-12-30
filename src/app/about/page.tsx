@@ -66,7 +66,7 @@ export default function AboutPage() {
                                 </div>
 
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 w-full">
-                                    <Link href="/products" className="h-14 px-8 rounded-full bg-primary text-[#050505] text-base font-bold tracking-wide hover:shadow-neon hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
+                                    <Link href="/new-equipment" className="h-14 px-8 rounded-full bg-primary text-[#050505] text-base font-bold tracking-wide hover:shadow-neon hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
                                         Shop Inventory
                                     </Link>
                                     <Link href="/contact" className="h-14 px-8 rounded-full bg-white/5 border border-white/10 text-white backdrop-blur-md text-base font-semibold hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center justify-center w-full sm:w-auto">

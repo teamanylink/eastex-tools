@@ -91,7 +91,7 @@ function OrderConfirmationContent() {
                         Continue Shopping
                     </Link>
                     <Link
-                        href="#"
+                        href="/"
                         className="h-12 px-8 rounded-full bg-white/5 border border-white/10 text-white font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
                     >
                         View Order Status

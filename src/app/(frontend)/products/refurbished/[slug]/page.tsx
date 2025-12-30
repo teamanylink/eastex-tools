@@ -267,7 +267,7 @@ export default async function RefurbishedProductPage({ params }: ProductPageProp
                             </div>
                         </div>
                         <div className="mt-8 pt-6 border-t border-white/10 relative z-10">
-                            <a href="#" className="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-2 group/link">
+                            <a href="/warranty" className="text-primary text-sm font-bold hover:text-white transition-colors flex items-center gap-2 group/link">
                                 View Warranty Policy
                                 <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

@@ -47,12 +47,6 @@ export default function NewEquipmentPage() {
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
-                        <Link href="#" className="hover:text-primary transition-colors">
-                            Catalog
-                        </Link>
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
                         <span className="text-white font-medium">New Equipment</span>
                     </div>
 

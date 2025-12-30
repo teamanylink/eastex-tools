@@ -62,12 +62,12 @@ export default function CheckoutPage() {
                             <h2 className="text-xl font-semibold tracking-wide text-white">
                                 Contact Information
                             </h2>
-                            <a
-                                href="#"
+                            <button
+                                type="button"
                                 className="text-sm text-primary hover:underline transition-colors"
                             >
                                 Sign in for faster checkout
-                            </a>
+                            </button>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="md:col-span-2">
