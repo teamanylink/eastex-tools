@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { refurbishedProducts } from "@/lib/products";
 
@@ -26,14 +24,12 @@ export default function RefurbishedPage() {
     });
 
     return (
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative">
             {/* Background Effects */}
             <div className="fixed top-20 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10 mix-blend-screen"></div>
             <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue-500/5 to-transparent rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
-            <Header />
-
-            <main className="flex-grow flex flex-col items-center w-full px-6 pb-20 pt-24">
+            <div className="flex flex-col items-center w-full px-6 pb-20">
                 <div className="w-full max-w-7xl flex flex-col gap-12">
                     {/* Hero Section */}
                     <section className="relative mt-8 w-full rounded-[3rem] overflow-hidden min-h-[500px] flex items-center justify-center p-8 group border border-white/10">
@@ -148,9 +144,7 @@ export default function RefurbishedPage() {
                         </div>
                     </section>
                 </div>
-            </main>
-
-            <Footer />
+            </div>
         </div>
     );
 }

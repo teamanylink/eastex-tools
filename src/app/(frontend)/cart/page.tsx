@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
@@ -13,7 +11,7 @@ export default function CartPage() {
     const total = subtotal + tax;
 
     return (
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative">
             {/* Background Effects */}
             <div
                 className="fixed inset-0 -z-10"
@@ -23,9 +21,7 @@ export default function CartPage() {
                 }}
             ></div>
 
-            <Header />
-
-            <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-10 pt-32">
+            <div className="w-full max-w-7xl mx-auto px-6 py-10">
                 {/* Breadcrumbs */}
                 <div className="flex items-center gap-2 mb-8 text-sm">
                     <Link href="/" className="text-white/40 hover:text-primary transition-colors">
@@ -145,8 +141,8 @@ export default function CartPage() {
                                                     <div className="flex items-center gap-2 mb-2">
                                                         <span
                                                             className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${item.manufacturer === 'ridgid'
-                                                                    ? "bg-red-500/20 text-red-400 border-red-500/20"
-                                                                    : "bg-green-500/20 text-green-400 border-green-500/20"
+                                                                ? "bg-red-500/20 text-red-400 border-red-500/20"
+                                                                : "bg-green-500/20 text-green-400 border-green-500/20"
                                                                 }`}
                                                         >
                                                             {item.manufacturer === 'ridgid' ? 'RIDGID' : 'Greenlee'} Part
@@ -335,9 +331,7 @@ export default function CartPage() {
                         </div>
                     </div>
                 )}
-            </main>
-
-            <Footer />
+            </div>
         </div>
     );
 }
