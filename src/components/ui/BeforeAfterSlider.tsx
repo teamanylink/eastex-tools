@@ -46,8 +46,6 @@ export const BeforeAfterSlider: React.FC<BeforeAfterSliderProps> = ({
         setIsDragging(true);
     };
 
-    const _handleMouseUp = () => setIsDragging(false);
-
     // Auto-slide animation
     useEffect(() => {
         if (hasInteracted) return;

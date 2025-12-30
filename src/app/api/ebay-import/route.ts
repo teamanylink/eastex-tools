@@ -45,7 +45,7 @@ async function scrapeEbayStore(storeUrl: string): Promise<{ success: boolean; pr
         const html = data.data?.html || "";
 
         // Extract products from the scraped content
-        const products = parseEbayProducts(markdown, html, storeUrl);
+        const products = parseEbayProducts(markdown, html);
 
         return {
             success: true,
@@ -60,7 +60,7 @@ async function scrapeEbayStore(storeUrl: string): Promise<{ success: boolean; pr
     }
 }
 
-function parseEbayProducts(markdown: string, html: string, _baseUrl: string): EbayProduct[] {
+function parseEbayProducts(markdown: string, html: string): EbayProduct[] {
     const products: EbayProduct[] = [];
 
     // Method 1: Parse from markdown - look for product patterns

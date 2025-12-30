@@ -374,6 +374,7 @@ export default function ProductImporterPage() {
                                     }}
                                 >
                                     {product.imageUrl && (
+                                        // eslint-disable-next-line @next/next/no-img-element
                                         <img
                                             src={product.imageUrl}
                                             alt={product.name}

@@ -43,6 +43,7 @@ export default async function NewProductPage({ params }: ProductPageProps) {
                             <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
 
                             <div className="relative z-10 w-full aspect-[4/3] flex items-center justify-center">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
                                 <img
                                     src={product.image}
                                     alt={product.name}
@@ -73,6 +74,7 @@ export default async function NewProductPage({ params }: ProductPageProps) {
                                         : "border-white/10 bg-white/5 hover:border-white/30 opacity-60 hover:opacity-100 hover:-translate-y-1"
                                         }`}
                                 >
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={product.image}
                                         alt={`View ${i}`}

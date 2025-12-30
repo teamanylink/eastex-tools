@@ -365,6 +365,7 @@ export default function EbayImporterPage() {
                                             borderRadius: "8px",
                                             overflow: "hidden",
                                         }}>
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
                                             <img
                                                 src={product.imageUrl}
                                                 alt={product.name}

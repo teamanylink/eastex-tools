@@ -56,6 +56,7 @@ export default async function RefurbishedProductPage({ params }: ProductPageProp
                             </div>
 
                             {/* Main Image */}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                                 src={product.image}
                                 alt={product.name}
@@ -78,6 +79,7 @@ export default async function RefurbishedProductPage({ params }: ProductPageProp
                                     className={`glass-panel rounded-xl aspect-square p-2 flex items-center justify-center transition-all duration-300 ${i === 1 ? "border-primary/50 ring-1 ring-primary/30 shadow-[0_0_15px_rgba(13,242,89,0.1)]" : "hover:border-white/30 opacity-70 hover:opacity-100 hover:-translate-y-1"
                                         }`}
                                 >
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
                                         src={product.image}
                                         alt={`View ${i}`}
