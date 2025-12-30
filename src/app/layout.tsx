@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Eastex Tools - Premium Industrial Equipment",
+    title: "Eastex Tool - Premium Industrial Equipment",
     description:
         "Premium new and certified refurbished equipment for the modern job site. Precision tools for precision work.",
     keywords: ["power tools", "industrial equipment", "refurbished tools", "RIDGID", "Greenlee", "Victaulic", "press tools", "drain cleaning"],

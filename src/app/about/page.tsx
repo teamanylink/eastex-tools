@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
-    title: 'About Us | Eastex Tools',
+    title: 'About Us | Eastex Tool',
     description: 'Family-owned industrial equipment supplier in Coldspring, TX. Specializing in pipe threading equipment, refurbishment, and purchasing used tools.',
 };
 

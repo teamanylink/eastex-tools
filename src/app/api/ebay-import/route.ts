@@ -184,7 +184,7 @@ export async function POST(request: NextRequest) {
             const importedProducts: Array<{ id: number; name: string }> = [];
             const errors: string[] = [];
 
-            // First, find or create "Eastex Tools" as a manufacturer
+            // First, find or create "Eastex Tool" as a manufacturer
             let manufacturerId: number | undefined;
             try {
                 const existingManufacturer = await payload.find({
@@ -199,7 +199,7 @@ export async function POST(request: NextRequest) {
                     const newManufacturer = await payload.create({
                         collection: "manufacturers",
                         data: {
-                            name: "Eastex Tools",
+                            name: "Eastex Tool",
                             slug: "eastex-tools",
                             website: "https://www.ebay.com/str/eastextoolllc",
                             featured: true,

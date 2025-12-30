@@ -283,7 +283,7 @@ export default async function NewProductPage({ params }: ProductPageProps) {
                         <ul className="space-y-6">
                             {[
                                 ["Professional Grade", "Built for demanding professional applications with industrial-grade components."],
-                                ["Authorized Dealer", "Eastex Tools is an authorized RIDGID dealer. All products include full manufacturer warranty."],
+                                ["Authorized Dealer", "Eastex Tool is an authorized RIDGID dealer. All products include full manufacturer warranty."],
                                 ["Expert Support", "Our team of specialists can help with product selection, training, and ongoing support."],
                                 ["Fast Shipping", "Most orders ship within 1-2 business days. Free shipping on orders over $500."],
                             ].map(([title, desc], i) => (

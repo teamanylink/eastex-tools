@@ -13,7 +13,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 group">
 
           <span className="text-white text-lg font-bold tracking-tight group-hover:text-primary transition-colors">
-            Eastex Tools
+            Eastex Tool
           </span>
         </Link>
 

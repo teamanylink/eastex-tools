@@ -12,7 +12,7 @@ export function Footer() {
                     <Link href="/" className="flex items-center gap-3">
 
                         <span className="text-white text-lg font-bold tracking-tight">
-                            Eastex Tools
+                            Eastex Tool
                         </span>
                     </Link>
                     <p className="text-white/40 text-sm max-w-xs">

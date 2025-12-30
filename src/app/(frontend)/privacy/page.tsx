@@ -12,7 +12,7 @@ export default function PrivacyPage() {
                 <div className="text-xl text-white/60 leading-relaxed max-w-2xl space-y-4 text-base">
                     <p>Last Updated: December 2025</p>
                     <p>
-                        Eastex Tools respects your privacy. This policy outlines how we collect, use, and protect your personal information.
+                        Eastex Tool respects your privacy. This policy outlines how we collect, use, and protect your personal information.
                     </p>
                     <h3 className="text-white font-bold mt-4">Data Collection</h3>
                     <p>

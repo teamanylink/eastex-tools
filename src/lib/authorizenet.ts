@@ -92,7 +92,7 @@ export async function chargeCreditCard(request: ChargeRequest): Promise<ChargeRe
         // Order info
         const orderDetails = new ApiContracts.OrderType();
         orderDetails.setInvoiceNumber(request.invoiceNumber || `INV-${Date.now()}`);
-        orderDetails.setDescription(request.orderDescription || "Eastex Tools Purchase");
+        orderDetails.setDescription(request.orderDescription || "Eastex Tool Purchase");
 
         // Line items
         const lineItemsArr: InstanceType<typeof ApiContracts.LineItemType>[] = [];

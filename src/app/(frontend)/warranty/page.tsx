@@ -11,7 +11,7 @@ export default function WarrantyPage() {
                 </h1>
                 <div className="text-xl text-white/60 leading-relaxed max-w-2xl">
                     <p className="mb-4">
-                        All Eastex Tools come with our standard Iron-Clad Guarantee. We stand behind the quality of our industrial equipment.
+                        All Eastex Tool products come with our standard Iron-Clad Guarantee. We stand behind the quality of our industrial equipment.
                     </p>
                     <ul className="list-disc list-inside space-y-2 mt-4">
                         <li><strong>New Equipment:</strong> 3-Year Limited Warranty covering defects in materials and workmanship.</li>
