@@ -17,8 +17,8 @@
  ✓ Starting...
  ✓ Ready in 1402ms
  ○ Compiling /_not-found ...
- ✓ Compiled /_not-found in 821ms (599 modules)
- GET /rigid 404 in 1065ms
+ ✓ Compiled /_not-found in 821ms (599 modules   Reload env: .env.local
+s
  ✓ Compiled /favicon.ico in 134ms (396 modules)
  GET /favicon.ico 200 in 217ms
  ○ Compiling /ridgid ...
@@ -687,3 +687,4 @@ No new imports found, skipping writing import map
  ✓ Compiled /favicon.ico in 231ms (1089 modules)
  GET /favicon.ico 200 in 321ms
  ○ Compiling /_not-found ...
+ ELIFECYCLE  Command failed.

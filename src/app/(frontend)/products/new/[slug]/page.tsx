@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { newEquipmentProducts } from "@/lib/products";
+import { newEquipmentProducts, featuredProducts, refurbishedProducts } from "@/lib/products";
 import { notFound } from "next/navigation";
+
+// Combine all product sources to ensure no product link goes to a blank page
+const allProducts = [...newEquipmentProducts, ...featuredProducts, ...refurbishedProducts];
 
 interface ProductPageProps {
     params: Promise<{ slug: string }>;
@@ -10,7 +13,7 @@ interface ProductPageProps {
 
 export default async function NewProductPage({ params }: ProductPageProps) {
     const { slug } = await params;
-    const product = newEquipmentProducts.find((p) => p.id === slug);
+    const product = allProducts.find((p) => p.id === slug);
 
     if (!product) {
         notFound();
