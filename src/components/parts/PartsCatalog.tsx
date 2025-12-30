@@ -2,10 +2,7 @@
 "use client";
 
 import { useState, useEffect, useTransition } from "react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Footer } from "@/components/layout/Footer";
-import { Header } from "@/components/layout/Header";
 import { useCart } from "@/context/CartContext";
 
 interface Part {
@@ -166,7 +163,6 @@ export function PartsCatalog({
     const searchParams = useSearchParams();
     const [search, setSearch] = useState(searchParams.get("q") || "");
     const [isPending, startTransition] = useTransition();
-    const { getItemCount } = useCart();
 
     // Debounce search
     useEffect(() => {
@@ -199,33 +195,14 @@ export function PartsCatalog({
     const brandColor = manufacturer === "ridgid" ? "text-red-500" : "text-green-500";
     const brandBg = manufacturer === "ridgid" ? "bg-red-500" : "bg-green-500";
     const isLoading = isPending;
-    const cartCount = getItemCount();
 
     return (
-        <div className="relative min-h-screen flex flex-col">
+        <div className="relative">
             {/* Background */}
             <div className="fixed inset-0 pointer-events-none z-0 bg-noise opacity-30 mix-blend-overlay"></div>
             <div className={`fixed top-[-20%] right-[-10%] w-[800px] h-[800px] ${manufacturer === 'ridgid' ? 'bg-red-600/10' : 'bg-green-600/10'} rounded-full blur-[120px] pointer-events-none z-0`}></div>
 
-            <Header />
-
-            {/* Floating Cart Indicator */}
-            {cartCount > 0 && (
-                <Link
-                    href="/cart"
-                    className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-primary text-black font-bold px-5 py-3 rounded-full shadow-neon hover:shadow-neon-strong transition-all duration-300 hover:scale-105"
-                >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <span>{cartCount} {cartCount === 1 ? 'Item' : 'Items'}</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                </Link>
-            )}
-
-            <main className="flex-grow pt-32 px-4 md:px-10 pb-20 z-10">
+            <div className="px-4 md:px-10 pb-20 z-10 relative">
                 <div className="max-w-7xl mx-auto space-y-10">
                     {/* Header Section */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -365,9 +342,7 @@ export function PartsCatalog({
                         </div>
                     )}
                 </div>
-            </main>
-
-            <Footer />
+            </div>
         </div>
     );
 }

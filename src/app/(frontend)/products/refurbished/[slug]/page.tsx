@@ -321,31 +321,7 @@ export default async function RefurbishedProductPage({ params }: ProductPageProp
                 </section>
             </main>
 
-            {/* Floating Bottom Action Bar - Improved Padding and Blur */}
-            <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-full max-w-xl px-4 z-40 transition-transform duration-500 ease-out translate-y-0">
-                <div className="glass-panel rounded-full p-2.5 pl-8 flex items-center justify-between shadow-[0_20px_60px_-10px_rgba(0,0,0,0.8)] border border-white/10 bg-[#0a100d]/80 backdrop-blur-xl">
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold mb-0.5">Total</span>
-                        <span className="text-2xl font-bold text-white leading-none">${product.price.toFixed(0)}<span className="text-lg text-white/60">.{(product.price % 1).toFixed(2).substring(2)}</span></span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                        <button className="size-12 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:bg-white/10 hover:text-white transition-colors bg-white/5 group">
-                            <svg className="w-5 h-5 group-hover:fill-current transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </button>
-                        <Link
-                            href="/cart"
-                            className="bg-primary text-[#050505] font-bold text-sm h-12 px-8 rounded-full hover:bg-[#00ff55] hover:shadow-neon transition-all flex items-center gap-2"
-                        >
-                            Add to Cart
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
-                    </div>
-                </div>
-            </div>
+
 
             <Footer />
         </div>

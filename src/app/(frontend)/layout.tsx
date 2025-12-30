@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingCart } from "@/components/ui/FloatingCart";
 
 export default function FrontendLayout({
   children,
@@ -12,6 +13,7 @@ export default function FrontendLayout({
       <main className="flex-1 pt-28">
         {children}
       </main>
+      <FloatingCart />
       <Footer />
     </div>
   )
