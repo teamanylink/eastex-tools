@@ -31,6 +31,22 @@ export function Header() {
           >
             Refurbished
           </Link>
+          <div className="relative group/parts">
+            <button className="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all flex items-center gap-1 cursor-default">
+              Parts
+              <svg className="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="absolute top-full text-left left-0 mt-2 w-48 bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 opacity-0 translate-y-2 invisible group-hover/parts:opacity-100 group-hover/parts:translate-y-0 group-hover/parts:visible transition-all duration-200 shadow-xl">
+              <Link href="/ridgid" className="block px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                RIDGID Parts
+              </Link>
+              <Link href="/greenlee" className="block px-4 py-3 rounded-xl text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                Greenlee Parts
+              </Link>
+            </div>
+          </div>
           <Link
             href="/about"
             className="px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition-all"
@@ -111,33 +127,35 @@ export function Header() {
       </header>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden fixed inset-x-4 top-24 glass-panel rounded-2xl p-6 z-50">
-          <nav className="flex flex-col gap-4">
-            <Link
-              href="/new-equipment"
-              className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              New Equipment
-            </Link>
-            <Link
-              href="/refurbished"
-              className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Refurbished
-            </Link>
-            <Link
-              href="/about"
-              className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About
-            </Link>
-          </nav>
-        </div>
-      )}
-    </div>
+      {
+        mobileMenuOpen && (
+          <div className="md:hidden fixed inset-x-4 top-24 glass-panel rounded-2xl p-6 z-50">
+            <nav className="flex flex-col gap-4">
+              <Link
+                href="/new-equipment"
+                className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                New Equipment
+              </Link>
+              <Link
+                href="/refurbished"
+                className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Refurbished
+              </Link>
+              <Link
+                href="/about"
+                className="text-base font-medium text-white/70 hover:text-primary transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+            </nav>
+          </div>
+        )
+      }
+    </div >
   );
 }
