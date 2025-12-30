@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FadeIn, FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export function Footer() {
     return (

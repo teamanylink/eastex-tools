@@ -60,7 +60,7 @@ async function scrapeEbayStore(storeUrl: string): Promise<{ success: boolean; pr
     }
 }
 
-function parseEbayProducts(markdown: string, html: string, baseUrl: string): EbayProduct[] {
+function parseEbayProducts(markdown: string, html: string, _baseUrl: string): EbayProduct[] {
     const products: EbayProduct[] = [];
 
     // Method 1: Parse from markdown - look for product patterns

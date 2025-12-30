@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPayload } from "payload";
 import config from "@payload-config";
-import { scrapeManufacturerProducts, ExtractedProduct } from "@/lib/firecrawl";
+import { scrapeManufacturerProducts, ExtractedProduct as _ExtractedProduct } from "@/lib/firecrawl";
 
 export async function POST(request: NextRequest) {
     try {
