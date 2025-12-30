@@ -58,7 +58,7 @@ function SkeletonGrid({ count = 24 }: { count?: number }) {
 }
 
 // Part Card Component with Add to Cart
-function PartCard({ part, manufacturer }: { part: Part; manufacturer: "ridgid" | "greenlee" }) {
+function PartCard({ part }: { part: Part }) {
     const { addItem, isInCart } = useCart();
     const [justAdded, setJustAdded] = useState(false);
     const inCart = isInCart(part.id);
@@ -76,7 +76,7 @@ function PartCard({ part, manufacturer }: { part: Part; manufacturer: "ridgid" |
         setTimeout(() => setJustAdded(false), 2000);
     };
 
-    const brandColor = manufacturer === "ridgid" ? "bg-red-500 hover:bg-red-400" : "bg-green-500 hover:bg-green-400";
+
 
     return (
         <div
@@ -120,11 +120,11 @@ function PartCard({ part, manufacturer }: { part: Part; manufacturer: "ridgid" |
                 <button
                     onClick={handleAddToCart}
                     disabled={justAdded}
-                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 ${justAdded
-                            ? 'bg-primary text-black'
-                            : inCart
-                                ? 'bg-white/10 text-white hover:bg-white/20'
-                                : `${brandColor} text-white`
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-bold transition-all duration-300 border border-white/10 ${justAdded
+                        ? 'bg-primary text-black border-transparent'
+                        : inCart
+                            ? 'bg-white/10 text-white hover:bg-white/20 border-white/20'
+                            : 'bg-white/5 text-white hover:bg-white/15 hover:border-white/30'
                         }`}
                 >
                     {justAdded ? (
@@ -293,7 +293,7 @@ export function PartsCatalog({
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {initialParts.map((part) => (
-                                <PartCard key={part.id} part={part} manufacturer={manufacturer} />
+                                <PartCard key={part.id} part={part} />
                             ))}
                         </div>
                     )}
